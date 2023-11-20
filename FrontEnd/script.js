@@ -1,19 +1,19 @@
 // récupération des travaux
 
-const url = 'http://localhost:5678/api/works'
+const urlWorks = 'http://localhost:5678/api/works'
 const gallery = document.getElementById('gallery')
 
 // Remplir la gallery
 const getProjects = () => {
-  fetch(url)
+  fetch(urlWorks)
     .then(function (res) {
       return res.json()
     })
     .then(function (data) {
-      for (element in data) {
-        gallery.innerHTML += `<figure data-category="${data[element].categoryId}">
-                                <img src="${data[element].imageUrl}" alt="${data[element].imageUrl}">
-                                <figcaption>${data[element].title}</figcaption>
+      for (element of data) {
+        gallery.innerHTML += `<figure data-category="${element.categoryId}">
+                                <img src="${element.imageUrl}" alt="${element.imageUrl}">
+                                <figcaption>${element.title}</figcaption>
                               </figure>`
       }
     })
@@ -25,17 +25,17 @@ getProjects()
 
 const btnObjects = document.querySelector('.btn-objects')
 btnObjects.addEventListener('click', () => {
-  const allFigures = gallery.querySelectorAll('figure')
-  for (figure in allFigures) {
-    if (figure['data-category'] !== 1) {
-      figure.remove()
-    }
-  }
-})
-console.log(figure)
+  const figures = Array.from(gallery.querySelectorAll('#gallery figure'))
+  // console.log(figures) = Array : toutes les figures (11)
+  console.log(figures)
 
-const allBtn = document.querySelector('.btn-all')
-allBtn.addEventListener('click', () => {
-  gallery.innerHTML = '' // Vider la galerie
-  getProjects() // Remplir encore
+  const figuresObjects = figures.filter(function (figure) {
+    if (figure.getAttribute('data-category') === '1') {
+      return true
+    } else {
+      return false
+    }
+  })
+  console.log(figuresObjects)
+  // console.log(figuresObjects) = Array : figures avec "data-category 1"
 })
