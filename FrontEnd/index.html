@@ -12,20 +12,32 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="script.js" defer></script>
+	<script src="login.js" defer></script>
+	<script src="https://kit.fontawesome.com/b6234b5d5a.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+	<div id="content">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p id="editableContent" contenteditable="true">Mode édition</p>
+	</div>
+	<!-- cacher la div en mode publique et la montrer en mode édition -->
+	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li>login</li>
+				<li><a class="login" href="login.html">login</a></li>
+				<!-- le montrer en mode publique et le cacher une fois connecté en mode édition -->
+				<li><a class="logout" href="index.html">logout</a></li>
+				<!-- le cacher en mode publique et le montrer une fois connecté en mode édition -->
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
 	</header>
+
 	<main>
 		<section id="introduction">
 			<figure>
@@ -43,7 +55,13 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="projets">
+				<h2>Mes Projets</h2>
+				<div class="icon-modifier">
+					<i class="fa-regular fa-pen-to-square"></i><span>modifier</span>
+				</div>
+				<!-- le cacher en mode publique et le montrer en mode édition, le rendre cliquable et redirige vers le modal -->
+			</div>
 
 			<div class="filters">
 				<button class="btn-all">Tous</button>
@@ -51,6 +69,7 @@
 				<button class="btn-appartements">Appartements</button>
 				<button class="btn-hotels-restaurants">Hôtels & Restaurants</button>
 			</div>
+			<!-- les montrer en mode publique et les cacher en mode édition -->
 
 			<div class="gallery" id="gallery">
 
