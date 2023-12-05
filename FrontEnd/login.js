@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('token de connexion', responseData.token)
         document.location.href =
           'file:///C:/Users/alice/Desktop/Projet6-OC/Portfolio-architecte-sophie-bluel/FrontEnd/index.html'
+        toggleMode()
+        updateVisibility()
       } else {
         throw new Error('mot de passe incorrect !')
       }
@@ -34,22 +36,4 @@ document.addEventListener('DOMContentLoaded', function () {
       badLogin.style.display = 'block'
     }
   })
-  const content = document.getElementById('content')
-  const loginBtn = document.querySelector('.login')
-  const logoutBtn = document.querySelector('.logout')
-  const filters = document.querySelector('.filters')
-
-  function login() {
-    content.style.display = 'none'
-    logoutBtn.style.display = 'none'
-    loginForm.style.display = 'block'
-  }
-
-  function logout() {
-    localStorage.removeItem('token de connexion')
-    content.style.display = 'block'
-    loginBtn.style.display = 'none'
-    loginForm.style.display = 'none'
-    filters.style.display = 'none'
-  }
 })

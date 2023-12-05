@@ -47,3 +47,43 @@ document.addEventListener('DOMContentLoaded', () => {
     .querySelector('.btn-all')
     .addEventListener('click', () => filterFiguresByCategory('all'))
 })
+
+// gestion du mode édition
+
+// variable pour représenter le mode (true pour édition, false pour public)
+let isEditionMode = false
+
+// Fonction pour basculer entre le mode public et édition
+function toggleMode() {
+  isEditionMode = !isEditionMode
+}
+
+// Fonction pour mettre à jour la visibilité des éléments en fonction du mode
+function updateVisibility() {
+  const contentDiv = document.getElementById('content')
+  const logoutLink = document.querySelector('.logout')
+  const iconModifierDiv = document.querySelector('.icon-modifier')
+  const loginLink = document.querySelector('.login')
+  const filtersDiv = document.querySelector('.filters')
+
+  if (isEditionMode) {
+    logoutLink.style.display = 'block'
+    iconModifierDiv.style.display = 'block'
+    loginLink.style.display = 'none'
+    filtersDiv.style.display = 'none'
+  } else {
+    contentDiv.style.display = 'none'
+    logoutLink.style.display = 'none'
+    iconModifierDiv.style.display = 'none'
+    loginLink.style.display = 'block'
+  }
+}
+toggleMode()
+updateVisibility()
+
+// rebascule en mode public au click sur logout
+const logoutLink = document.querySelector('.logout')
+logoutLink.addEventListener('click', () => {
+  toggleMode()
+  updateVisibility()
+})
