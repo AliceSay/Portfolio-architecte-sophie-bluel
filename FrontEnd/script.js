@@ -50,40 +50,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // gestion du mode édition
 
-// variable pour représenter le mode (true pour édition, false pour public)
-let isEditionMode = false
+document.addEventListener('DOMContentLoaded', function () {
+  // variable pour représenter le mode (true pour édition, false pour public)
+  let isEditionMode = false
 
-// Fonction pour basculer entre le mode public et édition
-function toggleMode() {
-  isEditionMode = !isEditionMode
-}
-
-// Fonction pour mettre à jour la visibilité des éléments en fonction du mode
-function updateVisibility() {
-  const contentDiv = document.getElementById('content')
-  const logoutLink = document.querySelector('.logout')
-  const iconModifierDiv = document.querySelector('.icon-modifier')
-  const loginLink = document.querySelector('.login')
-  const filtersDiv = document.querySelector('.filters')
-
-  if (isEditionMode) {
-    logoutLink.style.display = 'block'
-    iconModifierDiv.style.display = 'block'
-    loginLink.style.display = 'none'
-    filtersDiv.style.display = 'none'
-  } else {
-    contentDiv.style.display = 'none'
-    logoutLink.style.display = 'none'
-    iconModifierDiv.style.display = 'none'
-    loginLink.style.display = 'block'
+  // Fonction pour basculer entre le mode public et édition
+  function toggleMode() {
+    isEditionMode = !isEditionMode
+    // console.log('Mode basculé vers :', isEditionMode ? 'Édition' : 'Public')
+    updateVisibility()
   }
-}
-toggleMode()
-updateVisibility()
+  // Fonction pour mettre à jour la visibilité des éléments en fonction du mode
+  function updateVisibility() {
+    const contentDiv = document.getElementById('content')
+    const logoutLink = document.querySelector('.logout')
+    const iconModifierDiv = document.querySelector('.icon-modifier')
+    const loginLink = document.querySelector('.login')
+    const filtersDiv = document.querySelector('.filters')
+    console.log(filtersDiv)
 
-// rebascule en mode public au click sur logout
-const logoutLink = document.querySelector('.logout')
-logoutLink.addEventListener('click', () => {
+    if (isEditionMode) {
+      // Mode Édition : Affichage des éléments
+      logoutLink.style.display = 'block'
+      iconModifierDiv.style.display = 'block'
+      loginLink.style.display = 'none'
+      filtersDiv.classList.add('hidden')
+    } else {
+      // Mode Public : Affichage des éléments'
+      contentDiv.style.display = 'none'
+      logoutLink.style.display = 'none'
+      iconModifierDiv.style.display = 'none'
+      loginLink.style.display = 'block'
+      filtersDiv.classList.remove('hidden')
+    }
+  }
   toggleMode()
   updateVisibility()
+
+  // rebascule en mode public au click sur logout
+  const logoutLink = document.querySelector('.logout')
+  logoutLink.addEventListener('click', () => {
+    isEditionMode = false
+    console.log('cliqué sur logout')
+    updateVisibility()
+  })
 })
