@@ -24,10 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (response.status === 200) {
         localStorage.setItem('token de connexion', responseData.token)
-        document.location.href =
-          'file:///C:/Users/alice/Desktop/Projet6-OC/Portfolio-architecte-sophie-bluel/FrontEnd/index.html'
-        toggleMode()
-        updateVisibility()
+
+        document.location.href = 'index.html'
       } else {
         throw new Error('mot de passe incorrect !')
       }

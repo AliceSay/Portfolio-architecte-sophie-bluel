@@ -8,10 +8,10 @@ const getProjects = () => {
       gallery.innerHTML = data
         .map(
           (element) => `
-        <figure class="gallery-item" data-category="${element.categoryId}">
-          <img src="${element.imageUrl}" alt="${element.imageUrl}">
-          <figcaption>${element.title}</figcaption>
-        </figure>`
+         <figure class="gallery-item" data-category="${element.categoryId}">
+           <img src="${element.imageUrl}" alt="${element.imageUrl}">
+           <figcaption>${element.title}</figcaption>
+         </figure>`
         )
         .join('')
     })
@@ -49,34 +49,31 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // gestion du mode édition
-
 document.addEventListener('DOMContentLoaded', function () {
-  // variable pour représenter le mode (true pour édition, false pour public)
-  let isEditionMode = false
+  let editionMode = localStorage.getItem('token de connexion')
 
-  // Fonction pour basculer entre le mode public et édition
-  function toggleMode() {
-    isEditionMode = !isEditionMode
-    // console.log('Mode basculé vers :', isEditionMode ? 'Édition' : 'Public')
-    updateVisibility()
-  }
+  // vérifie si l'utilisateur est connecté en fonction du token
+  const isUserConnected = !!editionMode
+
+  // met à jour la visibilité des éléments en fonction du statut de connexion
+  updateVisibility(isUserConnected)
   // Fonction pour mettre à jour la visibilité des éléments en fonction du mode
-  function updateVisibility() {
+  function updateVisibility(isConnected) {
     const contentDiv = document.getElementById('content')
     const logoutLink = document.querySelector('.logout')
     const iconModifierDiv = document.querySelector('.icon-modifier')
     const loginLink = document.querySelector('.login')
     const filtersDiv = document.querySelector('.filters')
-    console.log(filtersDiv)
 
-    if (isEditionMode) {
-      // Mode Édition : Affichage des éléments
+    if (isConnected) {
+      // utilisateur connecté : Affichage des éléments
+      contentDiv.classList.remove('hidden')
       logoutLink.style.display = 'block'
       iconModifierDiv.style.display = 'block'
       loginLink.style.display = 'none'
       filtersDiv.classList.add('hidden')
     } else {
-      // Mode Public : Affichage des éléments'
+      // utilisateur non connecté : Affichage des éléments'
       contentDiv.style.display = 'none'
       logoutLink.style.display = 'none'
       iconModifierDiv.style.display = 'none'
@@ -84,14 +81,58 @@ document.addEventListener('DOMContentLoaded', function () {
       filtersDiv.classList.remove('hidden')
     }
   }
-  toggleMode()
-  updateVisibility()
+  // met à jour la visibilité initiale
+  updateVisibility(isUserConnected)
 
-  // rebascule en mode public au click sur logout
+  // rebascule en mode public au clic sur logout
   const logoutLink = document.querySelector('.logout')
   logoutLink.addEventListener('click', () => {
-    isEditionMode = false
-    console.log('cliqué sur logout')
-    updateVisibility()
+    // supprime le token de connexion du localstorage
+    localStorage.removeItem('token de connexion')
+    // met à jour la visibilité en mode no connecté
+    updateVisibility(false)
   })
 })
+
+// JS du Modal
+
+let modal = null
+
+const openModal = function (e) {
+  e.preventDefault()
+  const target = document.querySelector('.icon-modifier')
+  target.style.display = null
+  target.removeAttribute('aria-hidden')
+  target.setAttribute('aria-modal', 'true')
+  modal = target
+  modal.addEventListener('click', closeModal)
+}
+document.querySelector('.js-modal').forEach((a) => {
+  a.addEventListener('click', openModal)
+})
+
+const closeModal = document.getElementById('xmark')
+closeModal.addEventListener('click', function (e) {
+  if (modal === null) return
+  e.preventDefault()
+  modal.style.display = none
+  modal.setAttribute('aria-hidden', 'true')
+  modal.removeAttribute('aria-modal')
+  modal.removeEventListener('click', closeModal) / modal == null
+})
+
+// const getProjectsModale = () => {
+//   fetch(urlWorks)
+//     .then((res) => res.json())
+//     .then((data) => {
+//       modale.innerHTML = data
+//         .map(
+//           (element) => `
+//         <figure class="gallery-item" data-category="${element.categoryId}">
+//         <i>Poubelle</i>
+//           <img src="${element.imageUrl}" alt="${element.imageUrl}">
+//         </figure>`
+//         )
+//         .join('')
+//     })
+// }
