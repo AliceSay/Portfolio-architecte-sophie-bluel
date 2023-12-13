@@ -100,39 +100,43 @@ let modal = null
 
 const openModal = function (e) {
   e.preventDefault()
-  const target = document.querySelector('.icon-modifier')
-  target.style.display = null
+
+  const target = document.querySelector('#modifier')
+  target.style.display = 'block'
   target.removeAttribute('aria-hidden')
   target.setAttribute('aria-modal', 'true')
   modal = target
   modal.addEventListener('click', closeModal)
+  modal.querySelector('#xmark').addEventListener('click', closeModal)
 }
-document.querySelector('.js-modal').forEach((a) => {
-  a.addEventListener('click', openModal)
-})
 
-const closeModal = document.getElementById('xmark')
-closeModal.addEventListener('click', function (e) {
-  if (modal === null) return
-  e.preventDefault()
-  modal.style.display = none
-  modal.setAttribute('aria-hidden', 'true')
-  modal.removeAttribute('aria-modal')
-  modal.removeEventListener('click', closeModal) / modal == null
-})
+const closeModal = function (e) {
+  if (modal !== null) {
+    e.preventDefault()
+    modal.style.display = 'none'
+    modal.setAttribute('aria-hidden', 'true')
+    modal.removeAttribute('aria-modal')
+    modal.removeEventListener('click', closeModal)
+    modal.querySelector('#xmark').removeEventListener('click', closeModal)
+    modal = null
+  }
+}
+document.querySelector('#btn-modifier').addEventListener('click', openModal)
 
-// const getProjectsModale = () => {
-//   fetch(urlWorks)
-//     .then((res) => res.json())
-//     .then((data) => {
-//       modale.innerHTML = data
-//         .map(
-//           (element) => `
-//         <figure class="gallery-item" data-category="${element.categoryId}">
-//         <i>Poubelle</i>
-//           <img src="${element.imageUrl}" alt="${element.imageUrl}">
-//         </figure>`
-//         )
-//         .join('')
-//     })
-// }
+const modalWindow = document.querySelector('.modal')
+const getProjectsModal = () => {
+  fetch(urlWorks)
+    .then((res) => res.json())
+    .then((data) => {
+      modalWindow.innerHTML = data
+        .map(
+          (element) => `
+         <figure class="gallery-item" data-category="${element.categoryId}">
+         <i>Poubelle</i>
+           <img src="${element.imageUrl}" alt="${element.imageUrl}">
+         </figure>`
+        )
+        .join('')
+    })
+}
+getProjectsModal()
