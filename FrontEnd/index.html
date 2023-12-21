@@ -11,17 +11,18 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="login.js" defer></script>
 	<script src="script.js" defer></script>
 
 	<script src="https://kit.fontawesome.com/b6234b5d5a.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<div class="content">
-		<i class="fa-regular fa-pen-to-square"></i>
-		<p>Mode édition</p>
-	</div>
+	<container class="content">
+		<div class="edition-mode">
+			<i class="fa-regular fa-pen-to-square"></i>
+			<p>Mode édition</p>
+		</div>
+	</container>
 	<!-- cacher la div en mode publique et la montrer en mode édition -->
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -57,24 +58,29 @@
 			<div class="projets">
 				<h2>Mes Projets</h2>
 
-				<div class="icon-modifier" style="display:none;">
-					<i class="fa-regular fa-pen-to-square"></i><span id="btn-modifier">modifier</span></a>
+				<div class="icon-modifier">
+					<!-- "#modal1 = ouvrir la boite modal" -->
+					<i class="fa-regular fa-pen-to-square"></i><span class="js-modal">modifier</span>
 				</div>
+			</div>
 
-				<!-- <div class="hidden">MODALE EN ELLE MÊME</div> -->
+			<!-- <div class="hidden">MODALE EN ELLE MÊME</div> -->
 
-				<!-- implémentation modal-->
-				<aside id="modifier" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal"
-					style="display:none;">
-					<div class="modal-wrapper">
-						<i id="xmark" class="fa-solid fa-xmark"></i>
-						<h1 id="titlemodal">Galerie photo</h1>
+			<!-- implémentation modal-->
+			<aside id="icon-modifier" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal"
+				style="display:none;">
 
-						<button>Ajouter une photo</button>
+				<div class="modal-wrapper js-modal-stop">
 
-					</div>
-				</aside>
-				<!-- le cacher en mode publique et le montrer en mode édition, le rendre cliquable et redirige vers le modal -->
+					<i id="xmark" class="fa-solid fa-xmark"></i>
+					<h1 id="titlemodal">Galerie photo</h1>
+					<!-- ici tous les projets redimensionnés -->
+
+					<button>Ajouter une photo</button>
+
+				</div>
+			</aside>
+			<!-- le cacher en mode publique et le montrer en mode édition, le rendre cliquable et redirige vers le modal -->
 			</div>
 
 			<div class="filters">

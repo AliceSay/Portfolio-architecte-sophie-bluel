@@ -175,6 +175,11 @@ li:hover {
   color: #b1663c;
   cursor: pointer;
 }
+.projects a:visited {
+  text-decoration: none;
+  color: black;
+}
+
 .login {
   font-weight: 700;
 }
@@ -230,4 +235,7 @@ footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
+}
+.projects a {
+  text-decoration: none;
 }
