@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let responseData = await response.json()
         // console.log('Response status:', response.status)
         // console.log('Response data:', responseData)
-        localStorage.setItem('token de connexion', responseData.token)
+        localStorage.setItem('token_de_connexion', responseData.token)
 
         document.location.href = 'index.html'
         // updateVisibility(true)

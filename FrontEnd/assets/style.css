@@ -383,10 +383,81 @@ li a:visited {
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
 }
-.modal-wrapper {
+.modal1 {
+  position: relative;
   overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
   width: 630px;
   height: 688px;
-  padding: 50px;
+  margin: 90px;
   background-color: #fff;
+}
+
+#xmark {
+  font-size: 25px;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+#titlemodal {
+  position: absolute;
+  top: 70px;
+  left: 220px;
+  font-family: 'work sans';
+  font-weight: 300;
+  font-size: 30px;
+  color: black;
+}
+.btn-modal {
+  font-family: 'Syne';
+  font-weight: 550;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 250px;
+  height: 35px;
+  text-align: center;
+  border-radius: 60px;
+  position: absolute;
+  bottom: 20px;
+  left: 200px;
+}
+
+.modal-wrapper {
+  display: inline-flex;
+  gap: 30px 10px;
+  flex-wrap: wrap;
+  margin-right: 50px;
+  margin-left: 100px;
+  margin-top: auto;
+}
+
+.horizontal-bar {
+  border: 0.5px solid #b3b3b3;
+  width: 420px;
+  margin: auto;
+  height: 0;
+}
+.modal-item {
+  width: 75px;
+  height: 100px;
+}
+
+.modal-item img {
+  height: 100%;
+  width: 100%;
+}
+
+.modal-item span {
+  position: relative;
+  left: 56px;
+  bottom: 95px;
+  background-color: black;
+  cursor: pointer;
+}
+
+.modal-item i {
+  color: white;
+  font-size: 10px;
 }

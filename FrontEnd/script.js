@@ -45,7 +45,7 @@ const getProjects = () => {
 // gestion mode édition
 
 document.addEventListener('DOMContentLoaded', function () {
-  let editionMode = localStorage.getItem('token de connexion')
+  const editionMode = localStorage.getItem('token_de_connexion')
   const isUserConnected = !!editionMode
 
   updateVisibility(isUserConnected)
@@ -56,20 +56,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const logoutLink = document.querySelector('.logout')
     logoutLink.addEventListener('click', () => {
       //         // supprime le token de connexion du localstorage
-      localStorage.removeItem('token de connexion')
+      localStorage.removeItem('token_de_connexion')
       //         // met à jour la visibilité en mode non connecté
       updateVisibility(false)
     })
 
-    let modal = null
-
+    let modal = document.querySelector('#icon-modifier')
     const openModal = function (e) {
       e.preventDefault()
-      modal = document.querySelector('#icon-modifier')
       modal.style.display = null
       modal.removeAttribute('aria-hidden')
-      odal.setAttribute('aria-modal', 'true')
-      modal = target
+      modal.setAttribute('aria-modal', 'true')
       modal.addEventListener('click', closeModal)
       modal.querySelector('#xmark').addEventListener('click', closeModal)
       modal
@@ -98,29 +95,43 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.js-modal').addEventListener('click', openModal)
 
     const modalWindow = document.querySelector('.modal-wrapper')
-    const getProjectsModal = () => {
+
+    const getModalProjects = () => {
       fetch(urlWorks)
         .then((res) => res.json())
         .then((data) => {
           modalWindow.innerHTML = data
             .map(
               (element) => `
-            <figure class="gallery-item" data-category="${element.categoryId}">
-            <i class="fa-solid fa-trash-can"></i>
-           <img src="${element.imageUrl}" alt="${element.imageUrl}">
-            </figure>`
+         <figure class="modal-item" id="${element.id}">
+         <img src="${element.imageUrl}" alt="${element.imageUrl}">
+         </figure>`
             )
-
-            //     // mettre ici le redimensionnement des images
             .join('')
+
+          const modalGallery = Array.from(
+            modalWindow.querySelectorAll('.modal-item')
+          )
+
+          modalGallery.forEach((element) => {
+            const span = document.createElement('span')
+            const trash = document.createElement('i')
+            trash.classList.add('fa-solid', 'fa-trash-can')
+            trash.id = element.id
+            span.appendChild(trash)
+            element.appendChild(span)
+          })
         })
     }
-
-    getProjectsModal()
+    getModalProjects()
   } else {
+    console.log('Utilisateur non connecté')
     getProjects()
+    console.log('Galerie remplie')
     const filterFiguresByCategory = (category) => {
+      console.log('Click sur un filtré detecté')
       const figures = Array.from(gallery.querySelectorAll('.gallery-item'))
+      console.log('Le contenu de la variable figures : ', figures)
 
       figures.forEach((figure) => {
         const figureCategory = figure.getAttribute('data-category')
@@ -147,3 +158,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 })
+// } else {
+//   getProjects()
+//   const filterFiguresByCategory = (category) => {
+//     const figures = Array.from(gallery.querySelectorAll('.gallery-item'))
+
+//     figures.forEach((figure) => {
+//       const figureCategory = figure.getAttribute('data-category')
+//       if (figureCategory === category || category === 'all') {
+//         figure.classList.remove('hidden')
+//       } else {
+//         figure.classList.add('hidden')
+//       }
+//     })
+
+//     document
+//       .querySelector('.btn-objects')
+//       .addEventListener('click', () => filterFiguresByCategory('1'))
+//     document
+//       .querySelector('.btn-appartements')
+//       .addEventListener('click', () => filterFiguresByCategory('2'))
+//     document
+//       .querySelector('.btn-hotels-restaurants')
+//       .addEventListener('click', () => filterFiguresByCategory('3'))
+
+//     document
+//       .querySelector('.btn-all')
+//       .addEventListener('click', () => filterFiguresByCategory('all'))
