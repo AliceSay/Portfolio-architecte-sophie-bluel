@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', async function () {
       })
       if (response.status === 200) {
         let responseData = await response.json()
-        // console.log('Response status:', response.status)
-        // console.log('Response data:', responseData)
-        localStorage.setItem('token_de_connexion', responseData.token)
+        console.log('Response status:', response.status)
+        console.log('Response data:', responseData) /
+          localStorage.setItem('token', responseData.token)
 
         document.location.href = 'index.html'
         // updateVisibility(true)
@@ -36,3 +36,38 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   })
 })
+// const url = 'http://localhost:5678/api/users/login'
+// async function login() {
+//   const email = document.querySelector('input#email').value
+//   const password = document.querySelector('input#password').value
+//   try {
+//     const reponse = await fetch(url, {
+//       method: 'POST',
+//       body: JSON.stringify({
+//         email: email,
+//         password: password,
+//       }),
+//       headers: {
+//         accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//     }).then((response) => response.json())
+//     const token = reponse.token
+//     if (token) {
+//       window.localStorage.setItem('token', token)
+//       document.location.href = 'index.html'
+//     } else if (email === '' || password === '') {
+//       alert('Renseigner votre e-mail et votre mdp !')
+//     } else {
+//       alert("Erreur dans l'identifiant ou le mot de passe")
+//     }
+//   } catch (err) {
+//     alert('Le serveur ne répond pas !')
+//   }
+// }
+
+// const btnSeConnecter = document.querySelector('input#seConnecter')
+// btnSeConnecter.addEventListener('click', (event) => {
+//   event.preventDefault()
+//   login()
+// })

@@ -11,7 +11,7 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="script.js" defer></script>
+
 
 	<script src="https://kit.fontawesome.com/b6234b5d5a.js" crossorigin="anonymous"></script>
 </head>
@@ -23,7 +23,7 @@
 			<p>Mode édition</p>
 		</div>
 	</container>
-	<!-- cacher la div en mode publique et la montrer en mode édition -->
+
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -31,9 +31,9 @@
 				<li>projets</li>
 				<li>contact</li>
 				<li><a class="login" href="login.html">login</a></li>
-				<!-- le montrer en mode publique et le cacher une fois connecté en mode édition -->
+
 				<li><a class="logout">logout</a></li>
-				<!-- le cacher en mode publique et le montrer une fois connecté en mode édition -->
+
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -58,44 +58,68 @@
 			<div class="projets">
 				<h2>Mes Projets</h2>
 
-				<div class="icon-modifier">
-					<!-- "#modal1 = ouvrir la boite modal" -->
-					<i class="fa-regular fa-pen-to-square"></i><span class="js-modal">modifier</span>
-				</div>
-			</div>
+				<button class="modal-btn"><i class="fa-regular fa-pen-to-square"></i>Modifier</button>
 
-			<!-- <div class="hidden">MODALE EN ELLE MÊME</div> -->
-
-			<!-- implémentation modal-->
-			<aside id="icon-modifier" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal"
-				style="display:none;">
-
-				<div class="modal1">
-					<i id="xmark" class="fa-solid fa-xmark"></i>
-					<h1 id="titlemodal">Galerie photo</h1>
-					<div class="modal-wrapper js-modal-stop">
-						<!-- <figure class="modal-item" id="${element.id}">
-							<img src="https://picsum.photos/seed/picsum/200/300" alt="${element.imageUrl}">
-						</figure> -->
-
+				<div class="modal-container">
+					<div class="overlay">
 					</div>
-					<!-- ici tous les projets redimensionnés -->
 
-					<hr class="horizontal-bar">
+					<div class="modal" aria-hidden="true" role="dialog" style="display:none;">
 
-					<button class="btn-modal">Ajouter une photo</button>
+
+						<button class="btnArrowModal"><i class="fa-solid fa-arrow-left"></i></button>
+						<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+
+						<div class="contenumodal delete">
+							<h3 class="modalTitle">Galerie photo</h3>
+							<div class="galleryModal"></div>
+
+							<hr class="horizontal-bar">
+
+							<button class="btnModal btnAjouter" type="submit">Ajouter une photo</button>
+						</div>
+
+						<div class="contenumodal add">
+							<h3 class="modalTitle">Ajout photo</h3>
+							<div class="formModal">
+								<form method="POST" id="idFormModal">
+									<div class="formImg">
+										<i class="fa-regular fa-image"></i>
+										<label for="image">+ Ajouter photo</label>
+										<input type="file" id="image" class="inputImage" name="image"
+											accept="image/png, image/jpeg">
+										<p>jpg, png : 4mo max</p>
+									</div>
+									<div class="formTitle">
+										<label for="title">Titre</label>
+										<input type="text" id="title" class="inputTitle" name="title">
+									</div>
+									<div class="formCategory">
+										<label for="category">Catégorie</label>
+										<select id="category" class="selectCategory" name="category">
+											<option value="0">Sélectionner une catégorie</option>
+											<option value="1">Objets</option>
+											<option value="2">Appartements</option>
+											<option value="3">Hôtels&Restaurants</option>
+										</select>
+									</div>
+								</form>
+							</div>
+							<hr>
+							<button class="btnModal btnValider" type="submit">Valider</button>
+						</div>
+					</div>
 				</div>
-			</aside>
-			<!-- le cacher en mode publique et le montrer en mode édition, le rendre cliquable et redirige vers le modal -->
 			</div>
+
+
 
 			<div class="filters">
-				<button class="btn-all">Tous</button>
-				<button class="btn-objects">Objets</button>
-				<button class="btn-appartements">Appartements</button>
-				<button class="btn-hotels-restaurants">Hôtels & Restaurants</button>
+				<button class="btn-all" btn-category="0">Tous</button>
+				<button class="btn-objects" btn-category="1">Objets</button>
+				<button class="btn-appartements" btn-category="2">Appartements</button>
+				<button class="btn-hotels-restaurants" btn-category="3">Hôtels & Restaurants</button>
 			</div>
-			<!-- les montrer en mode publique et les cacher en mode édition -->
 
 			<div class="gallery" id="gallery">
 			</div>
@@ -121,6 +145,7 @@
 			</ul>
 		</nav>
 	</footer>
+	<script src="script.js"></script>
 </body>
 
 </html>

@@ -227,10 +227,6 @@ input[type='submit'] {
   text-decoration: underline;
 }
 
-#error-message {
-  color: red;
-  display: none;
-}
 footer nav ul {
   display: flex;
   justify-content: flex-end;
