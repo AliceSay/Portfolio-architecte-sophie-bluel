@@ -359,21 +359,23 @@ button.modal-btn {
   background: none;
   position: absolute;
   margin-left: 300px;
+  display: none;
   font-family: 'Work Sans';
-  color: #1d6154;
+  cursor: pointer;
 }
 button.modal-btn:hover {
   color: #b1663c;
-  cursor: pointer;
 }
 
 button.modal-btn i {
+  background: none;
   border: none;
   cursor: pointer;
   margin-right: 3px;
 }
 
 div.modal-container {
+  visibility: hidden;
   position: fixed;
   display: flex;
   justify-content: center;
@@ -384,13 +386,20 @@ div.modal-container {
   transition: visibility 0.4s;
 }
 
+div.modal-container.active {
+  visibility: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 div.overlay {
   opacity: 0;
   background: #000000d3;
-  transition: opacity 0.4s 0.2s ease-out;
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.4s 0.2s ease-out;
 }
 
 div.modal-container.active .overlay {

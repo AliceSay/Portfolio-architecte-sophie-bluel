@@ -23,85 +23,86 @@ function updateVisibility(isConnected) {
   }
 }
 
-// FILTRES
+// ____________________________générer les travaux dans la gallerie____________________________
 
-const boutonsFilters = document.querySelectorAll('.filters button')
-boutonsFilters.forEach((bouton) => {
-  bouton.addEventListener('click', () => {
-    const figures = Array.from(gallery.querySelectorAll('.gallery-item'))
-    figures.forEach((figure) => {
-      const figureCategory = figure.getAttribute('data-category')
-      const boutonCategory = bouton.getAttribute('btn-category')
-      if (figureCategory === boutonCategory) {
-        figure.classList.remove('hidden')
-      } else {
-        figure.classList.add('hidden')
-      }
-    })
-  })
-})
+document.addEventListener('DOMContentLoaded', async function () {
+  const urlWorks = 'http://localhost:5678/api/works'
 
-const btnAll = document.querySelector('.btn-all')
-btnAll.addEventListener('click', () => {
-  const categorie = '0'
-  const figures = document.querySelectorAll('figure.work')
-  figures.forEach((figure) => figure.remove())
-  getProjects(gallery)
-  boutonsFilters(categorie)
-})
-
-const btnObj = document.querySelector('.btn-objects')
-btnObj.addEventListener('click', () => {
-  const categorie = '1'
-  const filterObj = works.filter((work) => work.categoryId == categorie)
-  const figures = document.querySelectorAll('figure.work')
-  figures.forEach((figure) => figure.remove())
-  getProjects(filterObj)
-  boutonsFilters(categorie)
-})
-
-const btnAppart = document.querySelector('.btn-appartements')
-btnAppart.addEventListener('click', () => {
-  const categorie = '2'
-  const filterAppart = works.filter((work) => work.categoryId == categorie)
-  const figures = document.querySelectorAll('figure.work')
-  figures.forEach((figure) => figure.remove())
-  getProjects(filterAppart)
-  boutonsFilters(categorie)
-})
-
-const btnHotel = document.querySelector('.btn-hotels-restaurants')
-btnHotel.addEventListener('click', () => {
-  const categorie = '3'
-  const filterHotel = works.filter((work) => work.categoryId == categorie)
-  const figures = document.querySelectorAll('figure.work')
-  figures.forEach((figure) => figure.remove())
-  getProjects(filterHotel)
-  boutonsFilters(categorie)
-})
-
-// // générer les travaux dans la gallery
-const urlWorks = 'http://localhost:5678/api/works'
-
-const getProjects = (gallery) => {
-  fetch(urlWorks)
-    .then((res) => res.json())
-    .then((data) => {
-      gallery.innerHTML = data
-        .map(
-          (element) => `
+  const getProjects = (gallery) => {
+    fetch(urlWorks)
+      .then((res) => res.json())
+      .then((data) => {
+        gallery.innerHTML = data
+          .map(
+            (element) => `
           <figure class="gallery-item" data-category="${element.categoryId} data-id="${element.id}">
             <img src="${element.imageUrl}" alt="${element.imageUrl}">
             <figcaption>${element.title}</figcaption>
           </figure>`
-        )
-        .join('')
+          )
+          .join('')
+      })
+  }
+
+  //___________________________FILTRES_________________________________________
+
+  const boutonsFilters = document.querySelectorAll('.filters button')
+  boutonsFilters.forEach((bouton) => {
+    bouton.addEventListener('click', () => {
+      const figures = Array.from(gallery.querySelectorAll('.gallery-item'))
+      figures.forEach((figure) => {
+        const figureCategory = figure.getAttribute('data-category')
+        const boutonCategory = bouton.getAttribute('btn-category')
+        if (figureCategory === boutonCategory) {
+          figure.classList.remove('hidden')
+        } else {
+          figure.classList.add('hidden')
+        }
+      })
     })
-}
+  })
 
-// // gestion mode édition
+  const btnAll = document.querySelector('.btn-all')
+  btnAll.addEventListener('click', () => {
+    const categorie = '0'
+    const figures = document.querySelectorAll('figure.work')
+    figures.forEach((figure) => figure.remove())
+    getProjects(gallery)
+    boutonsFilters(categorie)
+  })
 
-document.addEventListener('DOMContentLoaded', async function () {
+  const btnObj = document.querySelector('.btn-objects')
+  btnObj.addEventListener('click', () => {
+    const categorie = '1'
+    const filterObj = works.filter((work) => work.categoryId == categorie)
+    const figures = document.querySelectorAll('figure.work')
+    figures.forEach((figure) => figure.remove())
+    getProjects(filterObj)
+    boutonsFilters(categorie)
+  })
+
+  const btnAppart = document.querySelector('.btn-appartements')
+  btnAppart.addEventListener('click', () => {
+    const categorie = '2'
+    const filterAppart = works.filter((work) => work.categoryId == categorie)
+    const figures = document.querySelectorAll('figure.work')
+    figures.forEach((figure) => figure.remove())
+    getProjects(filterAppart)
+    boutonsFilters(categorie)
+  })
+
+  const btnHotel = document.querySelector('.btn-hotels-restaurants')
+  btnHotel.addEventListener('click', () => {
+    const categorie = '3'
+    const filterHotel = works.filter((work) => work.categoryId == categorie)
+    const figures = document.querySelectorAll('figure.work')
+    figures.forEach((figure) => figure.remove())
+    getProjects(filterHotel)
+    boutonsFilters(categorie)
+  })
+
+  //________________________________gestion mode édition___________________________________________
+
   const gallery = document.getElementById('gallery')
   const editionMode = localStorage.getItem('token')
   const isUserConnected = !!editionMode
@@ -120,7 +121,22 @@ document.addEventListener('DOMContentLoaded', async function () {
     })
   }
 
-  // ouverture modale
+  //______________________________ouverture modale_____________________________________
+
+  const modalContainer = document.querySelector('.modal-container')
+  const modalTriggers = document.querySelectorAll('.modal-trigger')
+  modalTriggers.forEach((trigger) =>
+    trigger.addEventListener('click', toggleModal)
+  )
+  function toggleModal() {
+    modalContainer.classList.toggle('active')
+  }
+
+  const btnQuitterModal = document.querySelector('button.close-modal')
+
+  btnQuitterModal.addEventListener('click', () => {
+    resetForm()
+  })
 
   const modal = document.querySelector('.modal')
   const btnModifier = document.querySelector('.modal-btn')
@@ -148,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
   btnModifier.addEventListener('click', openModal)
 
-  // générer les travaux dans la modale
+  //__________________________générer les travaux dans la modale____________________________
 
   async function getProjectsModal(img, title, id) {
     try {
@@ -191,7 +207,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     getProjectsModal(img, title, id)
   })
 
-  // suppresion des travaux dans la modale
+  //_____________________________suppresion des travaux dans la modale________________________________
 
   function deleteWorks(idWorks, token) {
     fetch(`http://localhost:5678/api/works/${idWorks}`, {
@@ -208,13 +224,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     figureDelete.remove()
   }
 
-  // Ajout de travaux dans la modale
+  // _________________________________Ajout de travaux dans la modale_________________________________
 
-  const btnArrowModal = document.querySelector('button.btnArrowModal')
+  const btnArrowModal = document.querySelector('.btnArrowModal')
   const divDelete = document.querySelector('.delete')
   const divAdd = document.querySelector('.add')
   const btnAjouter = document.querySelector('.btnAjouter')
-  const btnValider = document.querySelector('button.btnValider')
+  const btnValider = document.querySelector('.btnValider')
 
   btnAjouter.addEventListener('click', () => {
     divAdd.style.display = 'flex'
@@ -227,4 +243,117 @@ document.addEventListener('DOMContentLoaded', async function () {
     divDelete.style.display = 'flex'
     btnArrowModal.style.display = 'none'
   })
+})
+// _______________________________________AFFICHAGE_MINIA_AJOUTER______________________________________
+
+const iconeImg = document.querySelector('.formImg i.fa-image')
+const pImage = document.querySelector('.formImg p')
+const btnAjoutImg = document.querySelector('.formImg input#image')
+const labelAjoutImg = document.querySelector('.formImg label')
+const btnValider = document.querySelector('.btnValider')
+btnAjoutImg.addEventListener('change', (event) => {
+  const imageFiles = event.target.files
+  const imageFilesLength = imageFiles.length
+  if (imageFilesLength > 0) {
+    const imageSrc = URL.createObjectURL(imageFiles[0])
+    const imagePreviewElement = document.createElement('img')
+    imagePreviewElement.src = imageSrc
+    imagePreviewElement.style.display = 'block'
+    const divFormImg = document.querySelector('.formImg')
+    divFormImg.appendChild(imagePreviewElement)
+    iconeImg.style.display = 'none'
+    pImage.style.display = 'none'
+    btnAjoutImg.style.display = 'none'
+    labelAjoutImg.style.display = 'none'
+  }
+})
+
+// _______________________________________FONCTION_AJOUTER_WORKS______________________________________
+
+async function addWorks() {
+  const image = document.getElementById('image').files
+  const title = document.getElementById('title').value
+  const category = document.getElementById('category').value
+
+  if (image.length === 0 || title === '' || category === '0') {
+    alert('Remplisser tous les champs !')
+  } else {
+    try {
+      const data = new FormData()
+      data.append('image', image[0])
+      data.append('title', title)
+      data.append('category', category)
+
+      const response = await fetch('http://localhost:5678/api/works/', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+
+          Authorization: `Bearer ${token}`,
+        },
+        body: data,
+      })
+
+      if (response.status === 201) {
+        const fetchAddWorks = await response.json()
+        const img = fetchAddWorks.imageUrl
+        const title = fetchAddWorks.title
+        const id = fetchAddWorks.id
+        const gallery = document.querySelector('div.gallery')
+        const figureElement = document.createElement('figure')
+        figureElement.classList.add('work', `work${fetchAddWorks.id}`)
+        const imgElement = document.createElement('img')
+        const figCaptionElement = document.createElement('figCaption')
+        imgElement.src = img
+        imgElement.alt = `${title}`
+        figCaptionElement.innerText = `${title}`
+        figureElement.appendChild(imgElement)
+        figureElement.appendChild(figCaptionElement)
+        gallery.appendChild(figureElement)
+
+        getprojectsModal(img, title, id)
+        alert(`${title} a bien été ajouté avec succès !`)
+        resetForm()
+      } else if (response.status === 401) {
+        alert("Vous n'ètes pas connecté !")
+        window.location.href = 'login.html'
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+btnValider.addEventListener('click', () => {
+  addWorks()
+})
+
+function resetForm() {
+  document.getElementById('idFormModal').reset()
+  iconeImg.style.display = 'flex'
+  pImage.style.display = 'flex'
+  labelAjoutImg.style.display = 'flex'
+  const imgMinia = document.querySelector('.formImg img')
+  imgMinia.remove()
+}
+
+// _______________________________________FONCTION_VERIF_CHAMPS_FORM______________________________________
+
+function verif() {
+  const image = document.getElementById('image').files
+  const title = document.getElementById('title').value
+  const category = document.getElementById('category').value
+  const btnValider = document.querySelector('.btnValider')
+
+  if (image.length === 1 && title && category != 0) {
+    btnValider.style.background = '#1D6154'
+  } else {
+    btnValider.style.background = '#A7A7A7'
+  }
+}
+
+const form = document.getElementById('idFormModal')
+
+form.addEventListener('change', () => {
+  verif()
 })
