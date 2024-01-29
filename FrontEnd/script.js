@@ -24,7 +24,7 @@ function updateVisibility(isConnected) {
 }
 
 // ____________________________générer les travaux dans la gallerie____________________________
-
+let works
 document.addEventListener('DOMContentLoaded', async function () {
   const urlWorks = 'http://localhost:5678/api/works'
 
@@ -32,10 +32,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     fetch(urlWorks)
       .then((res) => res.json())
       .then((data) => {
+        works = data
         gallery.innerHTML = data
           .map(
             (element) => `
-          <figure class="gallery-item" data-category="${element.categoryId} data-id="${element.id}">
+          <figure class="gallery-item" data-category="${element.categoryId}" data-id="${element.id}">
             <img src="${element.imageUrl}" alt="${element.imageUrl}">
             <figcaption>${element.title}</figcaption>
           </figure>`
@@ -46,59 +47,54 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   //___________________________FILTRES_________________________________________
 
-  const boutonsFilters = document.querySelectorAll('.filters button')
-  boutonsFilters.forEach((bouton) => {
-    bouton.addEventListener('click', () => {
-      const figures = Array.from(gallery.querySelectorAll('.gallery-item'))
-      figures.forEach((figure) => {
-        const figureCategory = figure.getAttribute('data-category')
-        const boutonCategory = bouton.getAttribute('btn-category')
-        if (figureCategory === boutonCategory) {
-          figure.classList.remove('hidden')
-        } else {
-          figure.classList.add('hidden')
-        }
-      })
-    })
-  })
-
   const btnAll = document.querySelector('.btn-all')
   btnAll.addEventListener('click', () => {
     const categorie = '0'
-    const figures = document.querySelectorAll('figure.work')
+    const figures = document.querySelectorAll('figure.gallery-item')
     figures.forEach((figure) => figure.remove())
     getProjects(gallery)
-    boutonsFilters(categorie)
   })
 
   const btnObj = document.querySelector('.btn-objects')
   btnObj.addEventListener('click', () => {
     const categorie = '1'
-    const filterObj = works.filter((work) => work.categoryId == categorie)
-    const figures = document.querySelectorAll('figure.work')
-    figures.forEach((figure) => figure.remove())
+    const figures = document.querySelectorAll('figure.gallery-item')
+    figures.forEach((figure) => {
+      if (figure.dataset.category !== categorie) {
+        figure.style.display = 'none'
+      } else {
+        figure.style.display = 'block'
+      }
+    })
     getProjects(filterObj)
-    boutonsFilters(categorie)
   })
 
   const btnAppart = document.querySelector('.btn-appartements')
   btnAppart.addEventListener('click', () => {
     const categorie = '2'
-    const filterAppart = works.filter((work) => work.categoryId == categorie)
-    const figures = document.querySelectorAll('figure.work')
-    figures.forEach((figure) => figure.remove())
+    const figures = document.querySelectorAll('figure.gallery-item')
+    figures.forEach((figure) => {
+      if (figure.dataset.category !== categorie) {
+        figure.style.display = 'none'
+      } else {
+        figure.style.display = 'block'
+      }
+    })
     getProjects(filterAppart)
-    boutonsFilters(categorie)
   })
 
   const btnHotel = document.querySelector('.btn-hotels-restaurants')
   btnHotel.addEventListener('click', () => {
     const categorie = '3'
-    const filterHotel = works.filter((work) => work.categoryId == categorie)
-    const figures = document.querySelectorAll('figure.work')
-    figures.forEach((figure) => figure.remove())
+    const figures = document.querySelectorAll('figure.gallery-item')
+    figures.forEach((figure) => {
+      if (figure.dataset.category !== categorie) {
+        figure.style.display = 'none'
+      } else {
+        figure.style.display = 'block'
+      }
+    })
     getProjects(filterHotel)
-    boutonsFilters(categorie)
   })
 
   //________________________________gestion mode édition___________________________________________
