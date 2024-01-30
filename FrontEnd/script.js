@@ -230,7 +230,9 @@ function deleteWorks(idWorks, token) {
 
   const figureDeleteModal = document.getElementById(`${idWorks}`)
 
-  const figureDelete = document.querySelector('.gallery-item')
+  const figureDelete = document.querySelector(
+    `.gallery-item[data-id="${idWorks}"]`
+  )
 
   figureDeleteModal.remove()
   figureDelete.remove()
@@ -254,7 +256,6 @@ btnAjoutImg.addEventListener('change', (event) => {
     divFormImg.appendChild(imagePreviewElement)
     iconeImg.style.display = 'none'
     pImage.style.display = 'none'
-    btnAjoutImg.style.display = 'none'
     labelAjoutImg.style.display = 'none'
   }
 })
@@ -320,6 +321,10 @@ btnValider.addEventListener('click', () => {
 })
 
 function resetForm() {
+  iconeImg.style.display = 'block'
+  pImage.style.display = 'block'
+  labelAjoutImg.style.display = 'block'
+  document.querySelector('.formImg img').remove()
   document.getElementById('idFormModal').reset()
 }
 
