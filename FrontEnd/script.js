@@ -42,16 +42,11 @@ async function getProjectsModal(img, title, id) {
     figureElement.appendChild(p)
     figureElement.appendChild(imgElement)
     gallery.appendChild(figureElement)
-
-    const btnTrash = document.querySelectorAll('p')
-    for (let i = 0; i < btnTrash.length; i++) {
-      btnTrash[i].addEventListener('click', () => {
-        const idWorks = btnTrash[i].className
-        const token = window.localStorage.getItem('token')
-        deleteWorks(idWorks, token)
-        alert(`Le travail d'id ${idWorks} a bien été supprimé !`)
-      })
-    }
+    const token = window.localStorage.getItem('token')
+    p.addEventListener('click', () => {
+      deleteWorks(id, token)
+      alert(`Le travail d'id ${id} a bien été supprimé !`)
+    })
   } catch (err) {
     alert('Le serveur ne fonctionne pas !')
   }
@@ -234,7 +229,7 @@ function deleteWorks(idWorks, token) {
   })
 
   const figureDeleteModal = document.getElementById(`${idWorks}`)
-  debugger
+
   const figureDelete = document.querySelector('.gallery-item')
 
   figureDeleteModal.remove()
@@ -311,7 +306,7 @@ async function addWorks() {
         alert(`${title} a bien été ajouté avec succès !`)
         resetForm()
       } else if (response.status === 401) {
-        alert("Vous n'ètes pas connecté !")
+        alert("Vous n'êtes pas connecté !")
         window.location.href = 'login.html'
       }
     } catch (err) {

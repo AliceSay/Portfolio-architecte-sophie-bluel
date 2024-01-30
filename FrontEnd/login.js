@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const loginForm = document.querySelector('form')
   const email = document.getElementById('email')
   const password = document.getElementById('password')
-  const badLogin = document.querySelector('#error-message')
+  const badLogin = document.getElementById('error-message')
 
   loginForm.addEventListener('submit', async (event) => {
     event.preventDefault()
@@ -27,9 +27,8 @@ document.addEventListener('DOMContentLoaded', async function () {
           localStorage.setItem('token', responseData.token)
 
         document.location.href = 'index.html'
-        // updateVisibility(true)
       } else {
-        throw new Error('mot de passe incorrect !')
+        throw new Error('identifiants incorrects !')
       }
     } catch (error) {
       badLogin.style.display = 'block'

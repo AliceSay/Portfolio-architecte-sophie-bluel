@@ -225,6 +225,7 @@ input[type='submit'] {
 }
 .mdp {
   text-decoration: underline;
+  text-align: center;
 }
 
 footer nav ul {
@@ -234,4 +235,14 @@ footer nav ul {
 }
 .projects a {
   text-decoration: none;
+}
+
+#seConnecter {
+  cursor: pointer;
+}
+
+#error-message {
+  text-align: center;
+  color: red;
+  font-size: 20px;
 }
