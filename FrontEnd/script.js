@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const figureDeleteModal = document.getElementById(`${idWorks}`)
     const figureDelete = document.querySelector('.gallery-item')
-    /* const figureDelete = document.querySelector(`[data-id=${idWorks}]`) */
+
     figureDeleteModal.remove()
     figureDelete.remove()
   }
