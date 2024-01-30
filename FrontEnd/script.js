@@ -23,6 +23,40 @@ function updateVisibility(isConnected) {
   }
 }
 
+//__________________________générer les travaux dans la modale____________________________
+
+async function getProjectsModal(img, title, id) {
+  try {
+    const gallery = document.querySelector('div.galleryModal')
+    const figureElement = document.createElement('figure')
+    figureElement.classList.add('workModal')
+    const imgElement = document.createElement('img')
+    imgElement.src = img
+    imgElement.alt = title
+    const p = document.createElement('p')
+    p.classList.add(`${id}`)
+    const elementSuppr = document.createElement('i')
+    elementSuppr.classList.add('fa-solid', 'fa-trash-can')
+    figureElement.id = id
+    p.appendChild(elementSuppr)
+    figureElement.appendChild(p)
+    figureElement.appendChild(imgElement)
+    gallery.appendChild(figureElement)
+
+    const btnTrash = document.querySelectorAll('p')
+    for (let i = 0; i < btnTrash.length; i++) {
+      btnTrash[i].addEventListener('click', () => {
+        const idWorks = btnTrash[i].className
+        const token = window.localStorage.getItem('token')
+        deleteWorks(idWorks, token)
+        alert(`Le travail d'id ${idWorks} a bien été supprimé !`)
+      })
+    }
+  } catch (err) {
+    alert('Le serveur ne fonctionne pas !')
+  }
+}
+
 // ____________________________générer les travaux dans la gallerie____________________________
 let works
 document.addEventListener('DOMContentLoaded', async function () {
@@ -131,6 +165,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const btnQuitterModal = document.querySelector('button.close-modal')
 
   btnQuitterModal.addEventListener('click', () => {
+    toggleModal()
     resetForm()
   })
 
@@ -154,45 +189,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     modal.style.display = 'block'
     modal.removeAttribute('aria-hidden')
     modal.setAttribute('aria-modal', 'true')
-    modal.addEventListener('click', closeModal)
     modal.querySelector('.close-modal').addEventListener('click', closeModal)
     modal.addEventListener('click', stopPropagation)
   }
   btnModifier.addEventListener('click', openModal)
-
-  //__________________________générer les travaux dans la modale____________________________
-
-  async function getProjectsModal(img, title, id) {
-    try {
-      const gallery = document.querySelector('div.galleryModal')
-      const figureElement = document.createElement('figure')
-      figureElement.classList.add('workModal')
-      const imgElement = document.createElement('img')
-      imgElement.src = img
-      imgElement.alt = title
-      const p = document.createElement('p')
-      p.classList.add(`${id}`)
-      const elementSuppr = document.createElement('i')
-      elementSuppr.classList.add('fa-solid', 'fa-trash-can')
-      figureElement.id = id
-      p.appendChild(elementSuppr)
-      figureElement.appendChild(p)
-      figureElement.appendChild(imgElement)
-      gallery.appendChild(figureElement)
-
-      const btnTrash = document.querySelectorAll('p')
-      for (let i = 0; i < btnTrash.length; i++) {
-        btnTrash[i].addEventListener('click', () => {
-          const idWorks = btnTrash[i].className
-          const token = window.localStorage.getItem('token')
-          deleteWorks(idWorks, token)
-          alert(`Le travail d'id ${idWorks} a bien été supprimé !`)
-        })
-      }
-    } catch (err) {
-      alert('Le serveur ne fonctionne pas !')
-    }
-  }
 
   const response = await fetch('http://localhost:5678/api/works')
   const worksModal = await response.json()
@@ -202,23 +202,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const id = work.id
     getProjectsModal(img, title, id)
   })
-
-  //_____________________________suppresion des travaux dans la modale________________________________
-
-  function deleteWorks(idWorks, token) {
-    fetch(`http://localhost:5678/api/works/${idWorks}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-
-    const figureDeleteModal = document.getElementById(`${idWorks}`)
-    const figureDelete = document.querySelector('.gallery-item')
-
-    figureDeleteModal.remove()
-    figureDelete.remove()
-  }
 
   // _________________________________Ajout de travaux dans la modale_________________________________
 
@@ -240,6 +223,23 @@ document.addEventListener('DOMContentLoaded', async function () {
     btnArrowModal.style.display = 'none'
   })
 })
+//_____________________________suppresion des travaux dans la modale________________________________
+
+function deleteWorks(idWorks, token) {
+  fetch(`http://localhost:5678/api/works/${idWorks}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const figureDeleteModal = document.getElementById(`${idWorks}`)
+  debugger
+  const figureDelete = document.querySelector('.gallery-item')
+
+  figureDeleteModal.remove()
+  figureDelete.remove()
+}
 // _______________________________________AFFICHAGE_MINIA_AJOUTER______________________________________
 
 const iconeImg = document.querySelector('.formImg i.fa-image')
@@ -279,7 +279,7 @@ async function addWorks() {
       data.append('image', image[0])
       data.append('title', title)
       data.append('category', category)
-
+      const token = window.localStorage.getItem('token')
       const response = await fetch('http://localhost:5678/api/works/', {
         method: 'POST',
         headers: {
@@ -307,7 +307,7 @@ async function addWorks() {
         figureElement.appendChild(figCaptionElement)
         gallery.appendChild(figureElement)
 
-        getprojectsModal(img, title, id)
+        getProjectsModal(img, title, id)
         alert(`${title} a bien été ajouté avec succès !`)
         resetForm()
       } else if (response.status === 401) {
@@ -326,11 +326,6 @@ btnValider.addEventListener('click', () => {
 
 function resetForm() {
   document.getElementById('idFormModal').reset()
-  iconeImg.style.display = 'flex'
-  pImage.style.display = 'flex'
-  labelAjoutImg.style.display = 'flex'
-  const imgMinia = document.querySelector('.formImg img')
-  imgMinia.remove()
 }
 
 // _______________________________________FONCTION_VERIF_CHAMPS_FORM______________________________________
