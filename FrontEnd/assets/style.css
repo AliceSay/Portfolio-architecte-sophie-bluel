@@ -477,6 +477,10 @@ button.btnArrowModal {
   cursor: pointer;
 }
 
+button.btnArrowModal:hover {
+  color: #1d6154;
+}
+
 div.contenumodal {
   display: flex;
   flex-direction: column;

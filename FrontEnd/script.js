@@ -237,7 +237,7 @@ function deleteWorks(idWorks, token) {
   figureDeleteModal.remove()
   figureDelete.remove()
 }
-// _______________________________________AFFICHAGE_MINIA_AJOUTER______________________________________
+// _______________________________________AFFICHAGE_MINIATURE_AJOUTER______________________________________
 
 const iconeImg = document.querySelector('.formImg i.fa-image')
 const pImage = document.querySelector('.formImg p')
