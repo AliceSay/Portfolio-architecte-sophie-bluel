@@ -512,7 +512,8 @@ div.galleryModal p {
   cursor: pointer;
   color: white;
   background-color: black;
-  font-size: 22px;
+  padding: 5px;
+  border-radius: 15%;
 }
 div.galleryModal p i {
   font-size: 15px;
