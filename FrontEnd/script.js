@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         figure.style.display = 'block'
       }
     })
-    getProjects()
   })
 
   const btnAppart = document.querySelector('.btn-appartements')
@@ -109,7 +108,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         figure.style.display = 'block'
       }
     })
-    getProjects()
   })
 
   const btnHotel = document.querySelector('.btn-hotels-restaurants')
@@ -123,7 +121,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         figure.style.display = 'block'
       }
     })
-    getProjects()
   })
 
   //________________________________gestion mode édition___________________________________________
@@ -326,7 +323,9 @@ function resetForm() {
   iconeImg.style.display = 'block'
   pImage.style.display = 'block'
   labelAjoutImg.style.display = 'block'
-  document.querySelector('.formImg img').remove()
+  if (document.querySelector('.formImg img')) {
+    document.querySelector('.formImg img').remove()
+  }
   document.getElementById('idFormModal').reset()
 }
 
