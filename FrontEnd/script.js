@@ -23,7 +23,7 @@ function updateVisibility(isConnected) {
   }
 }
 
-//__________________________générer les travaux dans la modale____________________________
+//__________________________générer les travaux dans la fenêtre modale____________________________
 
 async function getProjectsModal(img, title, id) {
   try {
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         figure.style.display = 'block'
       }
     })
-    getProjects(filterObj)
+    getProjects()
   })
 
   const btnAppart = document.querySelector('.btn-appartements')
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         figure.style.display = 'block'
       }
     })
-    getProjects(filterAppart)
+    getProjects()
   })
 
   const btnHotel = document.querySelector('.btn-hotels-restaurants')
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         figure.style.display = 'block'
       }
     })
-    getProjects(filterHotel)
+    getProjects()
   })
 
   //________________________________gestion mode édition___________________________________________
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     })
   }
 
-  //______________________________ouverture modale_____________________________________
+  //______________________________ouverture/fermeture fenêtre modale_____________________________________
 
   const modalContainer = document.querySelector('.modal-container')
   const modalTriggers = document.querySelectorAll('.modal-trigger')
@@ -189,6 +189,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
   btnModifier.addEventListener('click', openModal)
 
+  // __________________________générer travaux dans la fenêtre modale_____________________________________________
+
   const response = await fetch('http://localhost:5678/api/works')
   const worksModal = await response.json()
   worksModal.forEach((work) => {
@@ -198,7 +200,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     getProjectsModal(img, title, id)
   })
 
-  // _________________________________Ajout de travaux dans la modale_________________________________
+  // _______________________Gestion de la visibilité des fenêtres modale delete et add_________________________________
 
   const btnArrowModal = document.querySelector('.btnArrowModal')
   const divDelete = document.querySelector('.delete')
