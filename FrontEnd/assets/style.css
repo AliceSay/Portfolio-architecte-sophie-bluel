@@ -3,186 +3,682 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
-	font-size: 14px;
+  max-width: 1140px;
+  margin: auto;
+  font-family: 'Work Sans';
+  font-size: 14px;
 }
 header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
 }
 section {
-	margin: 50px 0
+  margin: 50px 0;
 }
 
-h1{
-	display: flex;
-	flex-direction: column;
-	font-family: 'Syne';
-	font-size: 22px;
-	font-weight: 800;
-	color: #B1663C
+h1 {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Syne';
+  font-size: 22px;
+  font-weight: 800;
+  color: #b1663c;
 }
 
 h1 > span {
-	font-family: 'Work Sans';
-	font-size:10px;
-	letter-spacing: 0.1em;
-;
+  font-family: 'Work Sans';
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding-top: 10px;
 }
 
-h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
+h2 {
+  font-family: 'Syne';
+  font-weight: 700;
+  font-size: 30px;
+  color: #1d6154;
 }
 nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-
+  display: flex;
+  align-items: center;
+  list-style-type: none;
 }
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+  padding: 0 10px;
+  font-size: 1.2em;
 }
 
 li:hover {
-	color: #B1663C;
+  color: #b1663c;
+  cursor: pointer;
 }
+
 #introduction {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 #introduction figure {
-	flex: 1
+  flex: 1;
 }
 #introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
+  display: block;
+  margin: auto;
+  width: 80%;
 }
 
 #introduction article {
-	flex: 1
+  flex: 1;
 }
 #introduction h2 {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 #portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
+  text-align: center;
+  margin-bottom: 1em;
 }
 .gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  margin-top: 50px;
 }
 
 .gallery img {
-	width: 100%;
-
+  width: 100%;
 }
 #contact {
-	width: 50%;
-margin: auto;
+  width: 50%;
+  margin: auto;
 }
 #contact > * {
-	text-align: center;
-
+  text-align: center;
 }
-#contact h2{
-	margin-bottom: 20px;
+#contact h2 {
+  margin-bottom: 20px;
 }
 #contact form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 #contact input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 #contact label {
-	margin: 2em 0 1em 0;
+  margin: 2em 0 1em 0;
 }
 #contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
+input[type='submit'] {
+  font-family: 'Syne';
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
 }
 
 footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em;
 }
 
+/* boutons filtres */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
+button {
+  border: 1px solid #1d6154;
+  background-color: transparent;
+  color: #1d6154;
+  border-radius: 45px;
+  font-family: 'Syne';
+  font-size: 15px;
+  font-weight: 570;
+  cursor: pointer;
+  justify-content: center;
+}
+button:hover {
+  background-color: #1d6154;
+  color: white;
+}
+
+.btn-all {
+  width: 7%;
+  height: 35px;
+}
+.btn-objects {
+  width: 7%;
+  height: 35px;
+}
+.btn-appartements {
+  width: 12%;
+  height: 35px;
+}
+.btn-hotels-restaurants {
+  width: 18%;
+  height: 35px;
+}
+
+/* mode édition */
+
+.hidden {
+  display: none;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: black;
+  gap: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.edition-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.projets {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 68px;
+}
+
+li a {
+  text-decoration: none;
+}
+li a.login:hover {
+  color: #b1663c;
+}
+li a.logout:hover {
+  color: #b1663c;
+}
+li a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+/* CSS du Modal */
+button.modal-btn {
+  border: none;
+  background: none;
+  position: absolute;
+  margin-left: 300px;
+  display: none;
+  font-family: 'Work Sans';
+  cursor: pointer;
+}
+button.modal-btn:hover {
+  color: #b1663c;
+}
+
+button.modal-btn i {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 3px;
+}
+
+div.modal-container {
+  visibility: hidden;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: visibility 0.4s;
+}
+
+div.modal-container.active {
+  visibility: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.overlay {
+  opacity: 0;
+  background: #000000d3;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.4s 0.2s ease-out;
+}
+
+div.modal-container.active .overlay {
+  opacity: 1;
+  transition: opacity 0.4s ease-out;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 800px;
+  width: 630px;
+  opacity: 0;
+  padding: 30px 100px;
+  border-radius: 5px;
+  background: #ffffff;
+  scale: 0.2;
+  transition: opacity 0.4s ease-out, scale 1s cubic-bezier(0.5, -1, 0, 1);
+}
+
+div.modal-container.active .modal {
+  opacity: 1;
+  scale: 1;
+  transition: opacity 0.4s 0.2s ease-out, scale 1s cubic-bezier(0.5, -1, 0, 1);
+}
+
+.modal-item {
+  width: 75px;
+  height: 100px;
+}
+
+.modal-item img {
+  height: 100%;
+  width: 100%;
+}
+
+.modal-item p {
+  position: relative;
+  left: 56px;
+  bottom: 95px;
+  background-color: black;
+  cursor: pointer;
+}
+
+.modal-item i {
+  color: white;
+  font-size: 10px;
+}
+
+button.close-modal {
+  padding: 8px;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  background: none;
+  color: #1d6154;
+}
+
+button.close-modal i {
+  cursor: pointer;
+}
+
+button.btnArrowModal {
+  padding: 8px;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  background: none;
+  display: none;
+  cursor: pointer;
+}
+
+button.btnArrowModal:hover {
+  color: #1d6154;
+}
+
+div.contenumodal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+div.contenumodal h3 {
+  font-size: 26px;
+}
+
+div.galleryModal {
+  display: grid;
+  grid-template-columns: 17% 17% 17% 17% 17%;
+  gap: 30px 10px;
+  width: 100%;
+  justify-content: center;
+  overflow-y: hidden;
+}
+
+div.galleryModal img {
+  width: 100%;
+}
+
+div.galleryModal p {
+  position: absolute;
+  margin: 5px 80px;
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  padding: 5px;
+  border-radius: 15%;
+}
+div.galleryModal p i {
+  font-size: 15px;
+}
+
+div.galleryModal p i:hover {
+  color: #1d6154;
+}
+
+div.contenumodal hr {
+  background: #000;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+div.contenumodal .btnModal {
+  font-family: 'Syne';
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  padding: 10px 60px;
+  text-align: center;
+  border-radius: 60px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 15px;
+}
+
+div.contenumodal .btnValider {
+  background: #a7a7a7;
+}
+
+div.delete {
+  display: flex;
+}
+
+div.add {
+  display: none;
+}
+
+div.formModal {
+  width: 100%;
+  height: 60%;
+}
+
+div.formModal form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+form div.formImg {
+  width: 100%;
+  background-color: #e8f1f6;
+  display: flex;
+  flex-direction: column;
+  height: 160px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+form div.formImg img {
+  height: 100%;
+}
+
+input[type='file' i] {
+  display: none;
+}
+
+.fa-image:before {
+  font-size: 70px;
+  color: #b9c5cc;
+}
+
+div.formImg label {
+  background-color: #cbd6dc;
+  color: #306685;
+  padding: 10px 40px;
+  border-radius: 50px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+div.formImg p {
+  color: #444444;
+  font-size: 10px;
+}
+
+form div.formTitle {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+form div.formCate {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+div.formModal form input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  width: 100%;
+  margin-top: 5px;
+  font-family: 'Work Sans';
+}
+
+div.formModal form select {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  width: 100%;
+  margin-top: 5px;
+  font-family: 'Work Sans';
+  cursor: pointer;
+}
+
+div.formModal form select option {
+  font-family: 'Work Sans';
+  height: 20px;
+}
+
+div.filter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.btnFilter {
+  background-color: #fff;
+  border: solid 1px #1d6154;
+  color: #1d6154;
+  padding: 6px 15px;
+  border-radius: 60px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-family: 'Syne';
+  font-weight: 700;
+  font-size: 16px;
+  height: 37px;
+  transition: 0.3s;
+}
+
+.btnFilter:hover {
+  background-color: #1d61542c;
+}
+
+.btnFilterActive {
+  background-color: #1d6154;
+  color: #fff;
+}
+
+.btnFilterActive:hover {
+  background-color: #1d6154;
+}
