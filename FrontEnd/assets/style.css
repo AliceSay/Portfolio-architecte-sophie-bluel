@@ -105,6 +105,7 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
@@ -137,7 +138,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
-  margin: 50px 0;
+  margin: 90px 0;
 }
 section {
   margin: 50px 0;
@@ -324,7 +325,11 @@ button:hover {
   gap: 15px;
   padding-top: 20px;
   padding-bottom: 20px;
-  width: 100%;
+  margin-bottom: 60px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
 }
 .edition-mode {
   display: flex;
@@ -640,6 +645,7 @@ div.formModal form select {
   margin-top: 5px;
   font-family: 'Work Sans';
   cursor: pointer;
+  background-color: white;
 }
 
 div.formModal form select option {
